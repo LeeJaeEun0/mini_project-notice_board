@@ -8,18 +8,21 @@ import java.util.List;
 @Table(name="Comment")
 public class CommentEntity {
     @Id
-    @Column
-    private Integer number;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long number;
 
     @Column
     @OneToMany
-    private List<BoardEntity> boardEntity;
+    private List<PostEntity> boardEntity;
 
     @Column
     private String context;
 
     @Column
     private String writer;
+
+    @Column
+    private String password;
 
     @Column
     private Date createdate;
