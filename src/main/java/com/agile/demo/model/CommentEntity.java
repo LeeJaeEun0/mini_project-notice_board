@@ -1,12 +1,21 @@
 package com.agile.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name="Comment")
-public class CommentEntity {
+public class CommentEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
@@ -23,15 +32,6 @@ public class CommentEntity {
 
     @Column
     private String password;
-
-    @Column
-    private Date createdate;
-
-    @Column
-    private Date updatedate;
-
-    @Column
-    private String ip;
 
     @Column
     private Integer commentRef;

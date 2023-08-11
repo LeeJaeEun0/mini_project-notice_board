@@ -1,15 +1,20 @@
 package com.agile.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.Date;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name="Board")
-public class PostEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long number;
+public class PostEntity extends BaseEntity{
 
     @Column(length = 30, nullable = false)
     private String title;
@@ -23,14 +28,6 @@ public class PostEntity {
     @Column(length = 10, nullable = false)
     private String writer;
 
-    @Column(updatable = false, nullable = false)
-    private Date createdate;
-
-    @Column
-    private Date updatedate;
-
-    @Column
-    private String ip;
 
 
 
