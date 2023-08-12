@@ -1,5 +1,6 @@
 package com.agile.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -7,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter @Setter
@@ -18,20 +20,31 @@ public class BaseEntity {
     private Long number;
 
     @CreatedDate
-    @Column(updatable = false)
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    @Column(name = "saved_at", nullable = true, insertable = true, updatable = true)
+    private LocalDateTime savedAt;
 
     @LastModifiedDate
-    @Column
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date updateDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    @Column(name = "modified_at", nullable = true, insertable = true, updatable = true)
+    private LocalDateTime modifiedAt;
 
-    @Column
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date deleteDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    @Column(name = "delete_at", nullable = true, insertable = true, updatable = true)
+    private LocalDateTime deleteAt;
 
     @Column
     private String ip;
+
+    @PrePersist
+    public void setDate() {
+        this.setSavedAt(LocalDateTime.now());
+        this.setModifiedAt(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void modifiedDate() {
+        this.setModifiedAt(LocalDateTime.now());
+    }
 
 }

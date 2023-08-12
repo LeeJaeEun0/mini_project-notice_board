@@ -1,9 +1,10 @@
 package com.agile.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
-import java.util.Date;
 @Setter
 @Getter
 public class PostDto {
@@ -17,11 +18,11 @@ public class PostDto {
 
     private String writer;
 
-    private Date createDate;
+    private LocalDateTime savedAt;
 
-    private Date updateDate;
+    private LocalDateTime modifiedAt;
 
-    private Date deleteDate;
+    private LocalDateTime deleteAt;
 
     private String ip;
 }
