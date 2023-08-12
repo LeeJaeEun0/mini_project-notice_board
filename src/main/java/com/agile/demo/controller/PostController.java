@@ -6,10 +6,7 @@ import com.agile.demo.persistence.PostReposity;
 import com.agile.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -28,8 +25,20 @@ public class PostController {
     }
 
     @GetMapping("/v1/post")
-    public List<?> GetPost(){
+    public List<?> getPost(){
         List<PostEntity> postEntitys = postService.getAllPost();
         return postEntitys;
+    }
+
+    @PutMapping("/v1/post/{number}")
+    public ResponseEntity<?> updatePost(@RequestBody PostDto postDto, @PathVariable Long number){
+        PostEntity postEntity = postService.updatePost(postDto, number);
+        return null;
+    }
+
+    @DeleteMapping("/v1/post/{number}")
+    public ResponseEntity<?> deletePost(@PathVariable Long number){
+        PostEntity postEntity = postService.deletePost(number);
+        return null;
     }
 }
