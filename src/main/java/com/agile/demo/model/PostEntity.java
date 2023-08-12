@@ -1,9 +1,6 @@
 package com.agile.demo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Data
 @Entity
 @Table(name="Board")
 public class PostEntity extends BaseEntity{
@@ -27,8 +25,5 @@ public class PostEntity extends BaseEntity{
 
     @Column(length = 10, nullable = false)
     private String writer;
-
-
-
 
 }
