@@ -35,23 +35,32 @@ public class PostService {
 
     public PostEntity updatePost(PostDto postDto, Long number){
         //1. 비밀번호가 일치하는지 확인
-        
+        PostEntity postEntity= postReposity.getById(number);
+        System.out.println(postEntity.toString());
+        if(postEntity.getPassword().equals(postDto.getPassword()))
+        {
         //2. 내용을 수정함
-        PostEntity postEntity = postReposity.getById(number);
-        postEntity.setTitle(postDto.getTitle());
-        postEntity.setContext(postDto.getContext());
-        postEntity.setWriter(postDto.getWriter());
-        postEntity.setPassword(postDto.getPassword());
+        PostEntity postEntity1 = postReposity.getById(number);
+        postEntity1.setTitle(postDto.getTitle());
+        postEntity1.setContext(postDto.getContext());
+        postEntity1.setWriter(postDto.getWriter());
+        postEntity1.setPassword(postDto.getPassword());
 
-        return postReposity.save(postEntity);
+        return postReposity.save(postEntity1);
+        }
+        return null;
     }
 
-    public PostEntity deletePost(Long number){
+    public PostEntity deletePost(PostDto postDto,Long number){
         //1. 비밀번호가 일치하는지 확인 
-        
-        //2. deleteAt에 삭제 날짜 넣기
-        PostEntity postEntity = postReposity.getById(number);
-        postEntity.setDeleteAt(LocalDateTime.now());
-        return postReposity.save(postEntity);
+        PostEntity postEntity= postReposity.getById(number);
+        if(postEntity.getPassword().equals(postDto.getPassword())) {
+
+            //2. deleteAt에 삭제 날짜 넣기
+            PostEntity postEntity1 = postReposity.getById(number);
+            postEntity1.setDeleteAt(LocalDateTime.now());
+            return postReposity.save(postEntity1);
+        }
+        return null;
     }
 }

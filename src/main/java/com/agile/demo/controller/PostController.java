@@ -33,12 +33,13 @@ public class PostController {
     @PutMapping("/v1/post/{number}")
     public ResponseEntity<?> updatePost(@RequestBody PostDto postDto, @PathVariable Long number){
         PostEntity postEntity = postService.updatePost(postDto, number);
-        return null;
+        return ResponseEntity.ok(postEntity);
+
     }
 
     @DeleteMapping("/v1/post/{number}")
-    public ResponseEntity<?> deletePost(@PathVariable Long number){
-        PostEntity postEntity = postService.deletePost(number);
-        return null;
+    public ResponseEntity<?> deletePost(@RequestBody PostDto postDto,@PathVariable Long number){
+        PostEntity postEntity = postService.deletePost(postDto,number);
+        return ResponseEntity.ok(postEntity);
     }
 }
