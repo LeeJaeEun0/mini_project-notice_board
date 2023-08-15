@@ -13,38 +13,39 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/v1/posts")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @PostMapping("/v1/post")
+    @PostMapping
     public ResponseEntity<?> createPost(@RequestBody PostDto postDto){
         PostEntity postEntity = postService.createPost(postDto);
 
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/v1/post")
+    @GetMapping
     public List<?> getAllPost(){
         List<PostEntity> postEntitys = postService.getAllPost();
         return postEntitys;
     }
 
-    @GetMapping("/v1/post/view/{number}")
+    @GetMapping("/view/{number}")
     public Optional<PostEntity> getOnePost(@PathVariable Long number){
         Optional<PostEntity> postEntitys = postService.getOnePost(number);
         return postEntitys;
     }
 
-    @PutMapping("/v1/post/{number}")
+    @PatchMapping("/{number}")
     public ResponseEntity<?> updatePost(@RequestBody PostDto postDto, @PathVariable Long number){
         PostEntity postEntity = postService.updatePost(postDto, number);
         return ResponseEntity.ok(postEntity);
 
     }
 
-    @DeleteMapping("/v1/post/{number}")
+    @DeleteMapping("/{number}")
     public ResponseEntity<?> deletePost(@RequestBody PostDto postDto,@PathVariable Long number){
         PostEntity postEntity = postService.deletePost(postDto,number);
         return ResponseEntity.ok(postEntity);
