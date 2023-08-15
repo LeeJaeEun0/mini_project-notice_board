@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -29,6 +30,12 @@ public class PostService {
 
     public List<PostEntity> getAllPost() {
         List<PostEntity> postEntities = postReposity.findByDeleteAtIsNull(); // delete가 null인 경우만 출력하기
+
+        return postEntities;
+    }
+
+    public Optional<PostEntity> getOnePost(Long number) {
+        Optional<PostEntity> postEntities = postReposity.findById(number); // delete가 null인 경우만 출력하기
 
         return postEntities;
     }

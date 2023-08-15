@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PostController {
@@ -25,8 +26,14 @@ public class PostController {
     }
 
     @GetMapping("/v1/post")
-    public List<?> getPost(){
+    public List<?> getAllPost(){
         List<PostEntity> postEntitys = postService.getAllPost();
+        return postEntitys;
+    }
+
+    @GetMapping("/v1/post/view/{number}")
+    public Optional<PostEntity> getOnePost(@PathVariable Long number){
+        Optional<PostEntity> postEntitys = postService.getOnePost(number);
         return postEntitys;
     }
 
