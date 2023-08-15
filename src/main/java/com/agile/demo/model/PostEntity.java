@@ -1,9 +1,11 @@
 package com.agile.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -26,4 +28,8 @@ public class PostEntity extends BaseEntity{
     @Column(length = 10, nullable = false)
     private String writer;
 
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    @JoinColumn(referencedColumnName = "number")
+    private List<CommentEntity> commentEntity;
 }
