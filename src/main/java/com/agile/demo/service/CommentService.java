@@ -34,25 +34,27 @@ public class CommentService {
         commentEntity.setSavedAt(LocalDateTime.now());
         commentEntity.setModifiedAt(LocalDateTime.now());
         commentEntity.setPostEntity(postEntity);
-        commentEntity.setCommentRef(1);
-        commentEntity.setCommentStep(1);
-        commentEntity.setCommentLevel(1);
+        commentEntity.setCommentRef(0);
+        commentEntity.setCommentStep(0);
+        commentEntity.setCommentLevel(0);
         return commentRepository.save(commentEntity);
     }
 
-//    public CommentEntity createComments(CommentDto commentDto){
-//        CommentEntity commentEntity = new CommentEntity();
-//        commentEntity.setNumber(commentDto.getNumber());
-//        commentEntity.setWriter(commentDto.getWriter());
-//        commentEntity.setPassword(commentDto.getPassword());
-//        commentEntity.setContext(commentDto.getContext());
-//        commentEntity.setSavedAt(LocalDateTime.now());
-//        commentEntity.setModifiedAt(LocalDateTime.now());
-//        commentEntity.setCommentRef(1);
-//        commentEntity.setCommentStep(1);
-//        commentEntity.setCommentLevel(1);
-//        return commentRepository.save(commentEntity);
-//    }
+    public CommentEntity createSubComment(Long number,CommentDto commentDto){
+        CommentEntity pCommentEntity = commentRepository.getById(number);
+
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setNumber(commentDto.getNumber());
+        commentEntity.setWriter(commentDto.getWriter());
+        commentEntity.setPassword(commentDto.getPassword());
+        commentEntity.setContext(commentDto.getContext());
+        commentEntity.setSavedAt(LocalDateTime.now());
+        commentEntity.setModifiedAt(LocalDateTime.now());
+        commentEntity.setCommentRef(pCommentEntity.getCommentRef()+1);
+        commentEntity.setCommentStep(pCommentEntity.getCommentStep()+1);
+        commentEntity.setCommentLevel(pCommentEntity.getCommentLevel()+1);
+        return commentRepository.save(commentEntity);
+    }
 
 
     public List<CommentEntity> getAllComment(){
@@ -60,4 +62,18 @@ public class CommentService {
 
         return commentEntities;
     }
+
+    public List<CommentEntity> getComment(Long number){
+        List<CommentEntity> commentEntities = commentRepository.findByPostEntity_NumberAndDeleteAtIsNull(number);
+
+        return commentEntities;
+    }
+
+//    public List<CommentEntity> deleteComment(Long number){
+//        List<CommentEntity> commentEntities = commentRepository.findByDeleteAtIsNull();
+//
+//        return commentEntities;
+//    }
+
+
 }
