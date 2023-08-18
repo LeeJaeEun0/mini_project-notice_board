@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name="Comment")
 public class CommentEntity extends BaseEntity{
 
-    @JoinColumn(referencedColumnName = "number")
+    @JoinColumn(name="post_number",referencedColumnName = "number")
     @ManyToOne
     @JsonBackReference
     private PostEntity postEntity;

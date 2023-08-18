@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @Data
 @Entity
-@Table(name="Board")
+@Table(name="Post")
 public class PostEntity extends BaseEntity{
 
     @Column(length = 30, nullable = false)
@@ -28,8 +28,7 @@ public class PostEntity extends BaseEntity{
     @Column(length = 10, nullable = false)
     private String writer;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "postEntity",cascade = CascadeType.REMOVE)
     @JsonManagedReference
-    @JoinColumn(referencedColumnName = "number")
     private List<CommentEntity> commentEntity;
 }

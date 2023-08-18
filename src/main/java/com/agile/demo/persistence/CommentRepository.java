@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CommentRepository  extends JpaRepository<CommentEntity, Long> {
     List<CommentEntity> findByPostEntity_Number(Long number);
+    List<CommentEntity> findByDeleteAtIsNull();
 }

@@ -14,7 +14,7 @@ public class CommentDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
 
-    private PostEntity poardEntity;
+    private Long postEntity;
 
     private String context;
 
