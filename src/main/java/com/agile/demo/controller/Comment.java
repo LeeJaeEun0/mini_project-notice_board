@@ -21,9 +21,21 @@ public class Comment {
         return ResponseEntity.accepted().build();
     }
 
+    @PostMapping("/{number}")
+    public ResponseEntity<?> createSubComment(@PathVariable Long number, @RequestBody CommentDto commentDto){
+        CommentEntity commentEntity = commentService.createSubComment(number,commentDto);
+        return ResponseEntity.accepted().build();
+    }
+
     @GetMapping
     public List<?> getAllComment(){
         List<CommentEntity> comments = commentService.getAllComment();
+        return comments;
+    }
+
+    @GetMapping("/{number}")
+    public List<?> getComment(@PathVariable Long number){
+        List<CommentEntity> comments = commentService.getComment(number);
         return comments;
     }
 }
