@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PostReposity extends JpaRepository<PostEntity, Long> {
     List<PostEntity> findByDeleteAtIsNull();
+    List<PostEntity> findByDeleteAtIsNullAndTitle(String text);
 }

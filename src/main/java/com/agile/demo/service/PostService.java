@@ -40,6 +40,12 @@ public class PostService {
         return postEntities;
     }
 
+    public List<PostEntity> searchPost(String text) {
+        List<PostEntity> postEntities = postReposity.findByDeleteAtIsNullAndTitle(text); // delete가 null인 경우만 출력하기
+
+        return postEntities;
+    }
+
     public PostEntity updatePost(PostDto postDto, Long number){
         //1. 비밀번호가 일치하는지 확인
         PostEntity postEntity= postReposity.getById(number);

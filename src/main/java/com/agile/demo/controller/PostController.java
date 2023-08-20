@@ -2,13 +2,11 @@ package com.agile.demo.controller;
 
 import com.agile.demo.dto.PostDto;
 import com.agile.demo.model.PostEntity;
-import com.agile.demo.persistence.PostReposity;
 import com.agile.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +33,12 @@ public class PostController {
     @GetMapping("/view/{number}")
     public Optional<PostEntity> getOnePost(@PathVariable Long number){
         Optional<PostEntity> postEntitys = postService.getOnePost(number);
+        return postEntitys;
+    }
+
+    @GetMapping("/{text}")
+    public List<?> SearchPost(@PathVariable String text){
+        List<PostEntity> postEntitys = postService.searchPost(text);
         return postEntitys;
     }
 
