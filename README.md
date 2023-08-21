@@ -54,23 +54,62 @@
          ```
            http://localhost:8080/v1/posts/view/1
          ```
-      * 결과
-        ```
+        * 결과
+          ```
+              {
+                     "number": 1,
+                     "savedAt": "2023-08-21",
+                     "modifiedAt": "2023-08-21",
+                     "deleteAt": null,
+                     "ip": null,
+                     "title": "안녕하세요!",
+                     "password": "1234",
+                     "context": "앞으로 잘부탁드려요!",
+                     "writer": "해피",
+                     "commentEntity": []
+                 }
+          ```
+   3. Patch
+        * 게시글 수정하기
+          ```
+          http://localhost:8080/v1/posts/1
+          ```
+        * 입력한 값
+          ```
+          {
+             "title" : "안녕하세요! 수정",
+             "context" : "앞으로 잘부탁드려요!",
+             "writer" : "해피",
+             "password" : "1234"
+           }
+             ```
+          * 결과
+            ```
             {
-                   "number": 1,
-                   "savedAt": "2023-08-21",
-                   "modifiedAt": "2023-08-21",
-                   "deleteAt": null,
-                   "ip": null,
-                   "title": "안녕하세요!",
-                   "password": "1234",
-                   "context": "앞으로 잘부탁드려요!",
-                   "writer": "해피",
-                   "commentEntity": []
+               "number": 1,
+               "savedAt": "2023-08-21",
+               "modifiedAt": "2023-08-21",
+               "deleteAt": null,
+               "ip": null,
+               "title": "안녕하세요! 수정",
+               "password": "1234",
+               "context": "앞으로 잘부탁드려요!",
+               "writer": "해피",
+               "commentEntity": []
                }
-        ```
-   3. put
-   4. delete
+             ```
+   4. Delete
+        * 게시글 삭제하기
+          ```
+            http://localhost:8080/v1/posts/1
+          ```
+        * 입력한 값
+          ```
+            {
+             "password": "1234"
+             }
+          ```
+        * 결과 - GET으로 출력시 해당 게시글 삭제된 것을 확인
 2. CommentController
     1. Post
     2. Get
