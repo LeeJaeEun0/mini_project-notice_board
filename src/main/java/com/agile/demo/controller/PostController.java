@@ -37,11 +37,13 @@ public class PostController {
 
     // Get - 한 개의 글 조회
     @GetMapping("/view/{number}")
-    public String getOnePost(@PathVariable Long number){
+    public ModelAndView getOnePost(@PathVariable Long number){
         Optional<PostEntity> postEntity = postService.getOnePost(number);
-        ModelAndView modelAndView = new ModelAndView("board");
-        modelAndView.addObject("post",postEntity);
-        return "view";
+
+        ModelAndView modelAndView = new ModelAndView("view");
+        modelAndView.addObject("post", postEntity.orElse(null)); // orElse(null)은 데이터가 없을 때를 대비한 처리
+
+        return modelAndView;
     }
 
     // Get - 검색하기
