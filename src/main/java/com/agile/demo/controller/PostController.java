@@ -6,6 +6,7 @@ import com.agile.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,9 +28,11 @@ public class PostController {
 
     // Get - 전체 글 조회
     @GetMapping
-    public List<?> getAllPost(){
-        List<PostEntity> postEntitys = postService.getAllPost();
-        return postEntitys;
+    public ModelAndView getAllPost(){
+        List<PostEntity> postEntities = postService.getAllPost();
+        ModelAndView modelAndView = new ModelAndView("/board");
+        modelAndView.addObject("boardList", postEntities);
+        return modelAndView;
     }
 
     // Get - 한 개의 글 조회
