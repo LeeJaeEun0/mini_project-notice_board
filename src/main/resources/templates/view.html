@@ -29,7 +29,9 @@
 
         </table>
     </div>
+    <br>
     <div>
+        <button onclick="location.href='board.html'">목록</button>
         <button onclick="location.href='update.html'">수정</button>
         <button >삭제</button>
     </div>
@@ -39,12 +41,12 @@
         <table border=1>
             <tr>
                 <th>작성자</th>
-                <td><input type="text" id="writer"><button /></td>
+                <td><input type="text" id="writer"><button type="submit" >제출하기</button></td>
 
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password"></td>
+                <td><input type="password" maxlength="4"></td>
             </tr>
             <tr>
                 <th>내용</th>
