@@ -73,6 +73,8 @@ public class PostService {
             PostEntity postEntity1 = postReposity.getById(number);
             postEntity1.setDeleteAt(LocalDateTime.now());
             return postReposity.save(postEntity1);
+            
+            //3. 댓글도 같이 삭제 - 날짜 기입
         }
         return null;
     }

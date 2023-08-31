@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        function redirectToPostView(element) {
+            var postNumber = element.getAttribute('data-post-number');
+            var url = '/view/' + postNumber;
+            window.location.href = url;
+        }
+    </script>
 </head>
 <body>
 <div><h2 th:text>게시글</h2></div>
@@ -17,7 +24,7 @@
             <th width="100">작성자</th>
             <th width="100">날짜</th>
         </tr>
-        <tr th:each="post:${boardList}" th:onclick="|location.href='@{/v1/posts/view/' + ${post.getNumber()} '}'|">
+        <tr th:each="post:${boardList}" th:attr="data-post-number=${post.getNumber()}" onclick="redirectToPostView(this)">
             <td th:text="${post.getNumber()}"></td>
             <td th:text="${post.getTitle()}"></td>
             <td th:text="${post.getWriter()}"></td>
