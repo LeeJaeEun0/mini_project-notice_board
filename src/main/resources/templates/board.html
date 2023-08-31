@@ -17,7 +17,7 @@
             <th width="100">작성자</th>
             <th width="100">날짜</th>
         </tr>
-        <tr th:each="post:${boardList}">
+        <tr th:each="post:${boardList}" th:onclick="|location.href='@{/v1/posts/view/' + ${post.getNumber()} '}'|">
             <td th:text="${post.getNumber()}"></td>
             <td th:text="${post.getTitle()}"></td>
             <td th:text="${post.getWriter()}"></td>
