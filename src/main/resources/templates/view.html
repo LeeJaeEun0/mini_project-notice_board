@@ -20,7 +20,7 @@
                 <th>작성자</th>
                 <td th:text="${post.getWriter()}"></td>
                 <th>조회수</th>
-                <td></td>
+                <td th:text="${post.getViews()}"></td>
             </tr>
             <tr>
                 <th>내용</th>

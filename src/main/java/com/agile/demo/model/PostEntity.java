@@ -28,6 +28,9 @@ public class PostEntity extends BaseEntity{
     @Column(length = 10, nullable = false)
     private String writer;
 
+    @Column(nullable = false)
+    private Integer views;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "postEntity",cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<CommentEntity> commentEntity;

@@ -24,7 +24,7 @@ public class PostService {
         postEntity.setContext(postDto.getContext());
         postEntity.setWriter(postDto.getWriter());
         postEntity.setPassword(postDto.getPassword());
-
+        postEntity.setViews(0);
         return postReposity.save(postEntity);
     }
 

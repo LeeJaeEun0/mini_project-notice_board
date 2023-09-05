@@ -18,6 +18,8 @@ public class PostDto {
 
     private String writer;
 
+    private Integer views;
+
     private LocalDateTime savedAt;
 
     private LocalDateTime modifiedAt;
