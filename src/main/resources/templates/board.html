@@ -6,7 +6,7 @@
     <script>
         function redirectToPostView(element) {
             var postNumber = element.getAttribute('data-post-number');
-            var url = '/view/' + postNumber;
+            var url = '/v1/posts/view/' + postNumber;
             window.location.href = url;
         }
     </script>

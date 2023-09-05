@@ -14,17 +14,17 @@
             </tr>
             <tr>
                 <th>제목</th>
-                <td colspan="3"></td>
+                <td colspan="3" th:text="${post.getTitle()}"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td></td>
+                <td th:text="${post.getWriter()}"></td>
                 <th>조회수</th>
                 <td></td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td colspan="3"></td>
+                <td colspan="3" th:text="${post.getContext()}"></td>
             </tr>
 
         </table>
