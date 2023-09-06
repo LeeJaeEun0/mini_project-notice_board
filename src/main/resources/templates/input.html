@@ -5,34 +5,35 @@
     <title>Title</title>
 </head>
 <body>
-    <div><h2>게시글 작성하기</h2></div>
+<div><h2>게시글 작성하기</h2></div>
 <div>
-    <table border=1>
-        <tr>
-            <th>제목</th>
-            <th>작성</th>
-        </tr>
-        <tr>
-            <th><label>제목</label></th>
-            <td><input type="text" id="title" maxlength="100"></td>
-        </tr>
-        <tr>
-            <th><label>작성자</label></th>
-            <td><input type="text" id="writer" maxlength="100"></td>
-        </tr>
-        <tr>
-            <th><label>비밀번호</label></th>
-            <td><input type="password" id="password" maxlength="4"></td>
-        </tr>
-        <tr>
-            <th><label>내용</label></th>
-            <td><input type="text" id="context" maxlength="100" ></td>
-        </tr>
-    </table>
-</div>
-<div>
-    <button onclick="location.href='/v1/posts'">취소하기</button>
-    <button onclick="location.href='board.html'" >저장하기</button>
+    <form th:object="${postDto}" th:action="@{/v1/posts}" method="post">
+        <table border="1">
+            <tr>
+                <td>제목</td>
+                <td>작성</td>
+            </tr>
+            <tr>
+                <td><label for="title">제목</label></td>
+                <td><input type="text" th:field="*{title}" id="title" maxlength="100"></td>
+            </tr>
+            <tr>
+                <td><label for="writer">작성자</label></td>
+                <td><input type="text" th:field="*{writer}" id="writer" maxlength="100"></td>
+            </tr>
+            <tr>
+                <td><label for="password">비밀번호</label></td>
+                <td><input type="password" th:field="*{password}" id="password" maxlength="4"></td>
+            </tr>
+            <tr>
+                <td><label for="context">내용</label></td>
+                <td><input type="text" th:field="*{context}" id="context" maxlength="100"></td>
+            </tr>
+        </table>
+
+        <a th:href="@{/v1/posts}">취소하기</a>
+        <button type="submit">저장하기</button>
+    </form>
 </div>
 </body>
 </html>
