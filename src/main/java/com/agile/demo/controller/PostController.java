@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +21,10 @@ public class PostController {
 
     // Post - 게시글 작성
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody PostDto postDto){
+    public ModelAndView createPost(@ModelAttribute("postDto") PostDto postDto) {
         PostEntity postEntity = postService.createPost(postDto);
-
-        return ResponseEntity.accepted().build();
+        RedirectView redirectView = new RedirectView("/v1/posts", true); // GET 요청으로 리다이렉션
+        return new ModelAndView(redirectView);
     }
 
     // Get - 전체 글 조회
