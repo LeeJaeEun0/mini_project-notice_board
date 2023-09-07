@@ -54,8 +54,8 @@ public class PostController {
         return postEntitys;
     }
 
-    // Patch - 게시글 수정하기
-    @PatchMapping("/{number}")
+    // Put - 게시글 수정하기
+    @PutMapping("/{number}")
     public ResponseEntity<?> updatePost(@RequestBody PostDto postDto, @PathVariable Long number){
         PostEntity postEntity = postService.updatePost(postDto, number);
         return ResponseEntity.ok(postEntity);
