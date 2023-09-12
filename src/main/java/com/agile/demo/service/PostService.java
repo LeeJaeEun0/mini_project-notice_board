@@ -46,6 +46,20 @@ public class PostService {
         return postEntities;
     }
 
+    public String findPassword(PostDto postDto, Long number){
+        //1. 비밀번호가 일치하는지 확인
+        PostEntity postEntity= postReposity.getById(number);
+
+        String yn = null;
+        if(postEntity.getPassword().equals(postDto.getPassword()))
+            yn="y";
+        else
+            yn="n";
+        return yn;
+    }
+
+
+
     public PostEntity updatePost(PostDto postDto, Long number){
         //1. 비밀번호가 일치하는지 확인
         PostEntity postEntity= postReposity.getById(number);
