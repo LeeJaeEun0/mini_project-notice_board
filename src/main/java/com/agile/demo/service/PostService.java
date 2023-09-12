@@ -67,13 +67,12 @@ public class PostService {
         if(postEntity.getPassword().equals(postDto.getPassword()))
         {
         //2. 내용을 수정함
-        PostEntity postEntity1 = postReposity.getById(number);
-        postEntity1.setTitle(postDto.getTitle());
-        postEntity1.setContext(postDto.getContext());
-        postEntity1.setWriter(postDto.getWriter());
-        postEntity1.setPassword(postDto.getPassword());
+        postEntity.setTitle(postDto.getTitle());
+        postEntity.setContext(postDto.getContext());
+        postEntity.setWriter(postDto.getWriter());
+        postEntity.setPassword(postDto.getPassword());
 
-        return postReposity.save(postEntity1);
+        return postReposity.save(postEntity);
         }
         return null;
     }
