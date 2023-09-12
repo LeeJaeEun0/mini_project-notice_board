@@ -39,7 +39,7 @@ public class PageController {
     public String updateFindPasswordPage(Model model, @ModelAttribute("postDto") PostDto postDto,  @PathVariable Long number) {
         String yn = postService.findPassword(postDto, number);
         model.addAttribute("updatepostDto", new PostDto());
-
+        model.addAttribute("number", number);
         if(yn.equals("y"))
             return "update";
         else
