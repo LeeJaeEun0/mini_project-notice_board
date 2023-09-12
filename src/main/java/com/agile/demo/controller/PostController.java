@@ -59,7 +59,6 @@ public class PostController {
     public ResponseEntity<?> updatePost(@RequestBody PostDto postDto, @PathVariable Long number){
         PostEntity postEntity = postService.updatePost(postDto, number);
         return ResponseEntity.ok(postEntity);
-
     }
 
     //Delete - 게시글 삭제하기

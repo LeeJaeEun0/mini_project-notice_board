@@ -3,36 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#putButton").click(function() {
+                // updatepostDto의 값을 가져오거나 필요한 데이터를 수집합니다.
+                var postData = {
+                    title: $('#title').val(),
+                    writer: $('#writer').val(),
+                    password: $('#password').val(),
+                    context: $('#context').val()
+                };
+
+                var formData = $("#putForm").serialize();
+
+                $.ajax({
+                    url: "/v1/posts/"+[[${number}]],
+                    type: "PUT",
+                    contentType: 'application/json', // JSON 데이터를 보낼 것이므로 Content-Type을 설정합니다.
+                    data: JSON.stringify(postData), // JSON 데이터로 변환하여 보냅니다.
+                    success: function(response) {
+                        // 성공한 경우 처리
+                        console.log('수정 성공:', response);
+                    },
+                    error: function(error) {
+                        // 오류 처리
+                        console.error('수정 오류:', error);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div><h2>게시글 작성하기</h2></div>
 <div>
-    <table border=1>
-        <tr>
-            <th>제목</th>
-            <th>작성</th>
-        </tr>
-        <tr>
-            <th><label>제목</label></th>
-            <td><input type="text" id="title" maxlength="100"></td>
-        </tr>
-        <tr>
-            <th><label>작성자</label></th>
-            <td><input type="text" id="writer" maxlength="100"></td>
-        </tr>
-        <tr>
-            <th><label>비밀번호</label></th>
-            <td><input type="password" id="password" maxlength="4" ></td>
-        </tr>
-        <tr>
-            <th><label>내용</label></th>
-            <td><input type="text" id="context" maxlength="100" ></td>
-        </tr>
-    </table>
-</div>
-<div>
-    <button onclick="location.href='/board'">취소하기</button>
-    <button onclick="location.href='/board'" >저장하기</button>
+    <form id="putForm" th:object="${updatepostDto}" th:action="@{/v1/posts}" method="post">
+        <table border="1">
+            <tr>
+                <td>제목</td>
+                <td>작성</td>
+            </tr>
+            <tr>
+                <td><label for="title">제목</label></td>
+                <td><input type="text" th:text="${updatepostDto.getTitle()}" th:field="*{title}" id="title" maxlength="100"></td>
+            </tr>
+            <tr>
+                <td><label for="writer">작성자</label></td>
+                <td><input type="text" th:text="${updatepostDto.getWriter()}" th:field="*{writer}" id="writer" maxlength="100"></td>
+            </tr>
+            <tr>
+                <td><label for="password">비밀번호</label></td>
+                <td><input type="password" th:text="${updatepostDto.getPassword()}" th:field="*{password}" id="password" maxlength="4"></td>
+            </tr>
+            <tr>
+                <td><label for="context">내용</label></td>
+                <td><input type="text" th:text="${updatepostDto.getContext()}" th:field="*{context}" id="context" maxlength="100"></td>
+            </tr>
+        </table>
+
+        <button th:href="@{/v1/posts}">취소하기</button>
+        <button type="button" id="putButton">수정하기</button>
+    </form>
 </div>
 </body>
 </html>
