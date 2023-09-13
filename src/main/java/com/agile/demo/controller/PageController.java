@@ -1,6 +1,7 @@
 package com.agile.demo.controller;
 
 import com.agile.demo.dto.PostDto;
+import com.agile.demo.model.PostEntity;
 import com.agile.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.Optional;
 
 @Controller
 public class PageController {
@@ -38,7 +41,8 @@ public class PageController {
     @PostMapping("/v1/updateposts/{number}")
     public String updateFindPasswordPage(Model model, @ModelAttribute("postDto") PostDto postDto,  @PathVariable Long number) {
         String yn = postService.findPassword(postDto, number);
-        model.addAttribute("updatepostDto", new PostDto());
+//        Optional<PostEntity> postDto1 = postService.getOnePost(number);
+//        model.addAttribute("postDto", postDto1);
         model.addAttribute("number", number);
         if(yn.equals("y"))
             return "update";

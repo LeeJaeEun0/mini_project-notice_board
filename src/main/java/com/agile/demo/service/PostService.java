@@ -17,7 +17,7 @@ public class PostService {
     @Autowired
     PostReposity postReposity;
 
-    public PostEntity createPost(PostDto postDto){
+    public PostEntity createPost(PostDto postDto) {
         PostEntity postEntity = new PostEntity();
         postEntity.setNumber(postDto.getNumber());
         postEntity.setTitle(postDto.getTitle());
@@ -46,52 +46,46 @@ public class PostService {
         return postEntities;
     }
 
-    public String findPassword(PostDto postDto, Long number){
+    public String findPassword(PostDto postDto, Long number) {
         //1. 비밀번호가 일치하는지 확인
-        PostEntity postEntity= postReposity.getById(number);
+        PostEntity postEntity = postReposity.getById(number);
 
         String yn = null;
-        if(postEntity.getPassword().equals(postDto.getPassword()))
-            yn="y";
+        if (postEntity.getPassword().equals(postDto.getPassword()))
+            yn = "y";
         else
-            yn="n";
+            yn = "n";
         return yn;
     }
 
-    public void plusViews(Long number){
+    public void plusViews(Long number) {
         //1. 비밀번호가 일치하는지 확인
-        PostEntity postEntity= postReposity.getById(number);
-        postEntity.setViews(postEntity.getViews()+1);
+        PostEntity postEntity = postReposity.getById(number);
+        postEntity.setViews(postEntity.getViews() + 1);
         postReposity.save(postEntity);
     }
 
-    public PostEntity updatePost(PostDto postDto, Long number){
-        //1. 비밀번호가 일치하는지 확인
-        PostEntity postEntity= postReposity.getById(number);
-        System.out.println(postEntity.toString());
-        if(postEntity.getPassword().equals(postDto.getPassword()))
-        {
+    public PostEntity updatePost(PostDto postDto, Long number) {
+        //1. 해당하는 post 가져오기
+        PostEntity postEntity = postReposity.getById(number);
         //2. 내용을 수정함
         postEntity.setTitle(postDto.getTitle());
         postEntity.setContext(postDto.getContext());
-        postEntity.setWriter(postDto.getWriter());
-        postEntity.setPassword(postDto.getPassword());
 
         return postReposity.save(postEntity);
-        }
-        return null;
+
     }
 
-    public PostEntity deletePost(PostDto postDto,Long number){
+    public PostEntity deletePost(PostDto postDto, Long number) {
         //1. 비밀번호가 일치하는지 확인 
-        PostEntity postEntity= postReposity.getById(number);
-        if(postEntity.getPassword().equals(postDto.getPassword())) {
+        PostEntity postEntity = postReposity.getById(number);
+        if (postEntity.getPassword().equals(postDto.getPassword())) {
 
             //2. deleteAt에 삭제 날짜 넣기
             PostEntity postEntity1 = postReposity.getById(number);
             postEntity1.setDeleteAt(LocalDateTime.now());
             return postReposity.save(postEntity1);
-            
+
             //3. 댓글도 같이 삭제 - 날짜 기입
         }
         return null;
