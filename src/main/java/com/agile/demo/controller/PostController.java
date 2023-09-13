@@ -39,6 +39,8 @@ public class PostController {
     // Get - 한 개의 글 조회
     @GetMapping("/view/{number}")
     public ModelAndView getOnePost(@PathVariable Long number){
+        postService.plusViews(number);
+
         Optional<PostEntity> postEntity = postService.getOnePost(number);
 
         ModelAndView modelAndView = new ModelAndView("view");

@@ -58,7 +58,12 @@ public class PostService {
         return yn;
     }
 
-
+    public void plusViews(Long number){
+        //1. 비밀번호가 일치하는지 확인
+        PostEntity postEntity= postReposity.getById(number);
+        postEntity.setViews(postEntity.getViews()+1);
+        postReposity.save(postEntity);
+    }
 
     public PostEntity updatePost(PostDto postDto, Long number){
         //1. 비밀번호가 일치하는지 확인
