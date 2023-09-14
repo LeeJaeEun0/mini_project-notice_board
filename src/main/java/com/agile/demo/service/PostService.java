@@ -41,7 +41,7 @@ public class PostService {
     }
 
     public List<PostEntity> searchPost(String text) {
-        List<PostEntity> postEntities = postReposity.findByDeleteAtIsNullAndTitle(text); // delete가 null인 경우만 출력하기
+        List<PostEntity> postEntities = postReposity.findText(text); // delete가 null인 경우만 출력하기
 
         return postEntities;
     }

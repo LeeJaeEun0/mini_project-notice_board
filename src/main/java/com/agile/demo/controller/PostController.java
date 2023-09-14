@@ -33,6 +33,7 @@ public class PostController {
         List<PostEntity> postEntities = postService.getAllPost();
         ModelAndView modelAndView = new ModelAndView("/board");
         modelAndView.addObject("boardList", postEntities);
+        modelAndView.addObject("postDto", new PostDto());
         return modelAndView;
     }
 
@@ -51,9 +52,11 @@ public class PostController {
 
     // Get - 검색하기
     @GetMapping("/{text}")
-    public List<?> SearchPost(@PathVariable String text){
-        List<PostEntity> postEntitys = postService.searchPost(text);
-        return postEntitys;
+    public ModelAndView SearchPost(@PathVariable String text){
+        List<PostEntity> postEntities = postService.searchPost(text);
+        ModelAndView modelAndView = new ModelAndView("/board");
+        modelAndView.addObject("boardList", postEntities);
+        return modelAndView;
     }
 
     // Put - 게시글 수정하기

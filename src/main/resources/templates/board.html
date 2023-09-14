@@ -3,18 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function redirectToPostView(element) {
             var postNumber = element.getAttribute('data-post-number');
             var url = '/v1/posts/view/' + postNumber;
             window.location.href = url;
         }
+
+        $(document).ready(function() {
+            $("#searchButton").click(function() {
+                var searchText = $("#searchInput").val();
+                $.ajax({
+                    url: '/v1/posts/search?text=' + searchText,
+                    type: 'GET',
+                    success: function(data) {
+                        // 검색 결과를 받아와서 화면에 표시
+                        $("#boardList").html(data);
+                    },
+                    error: function() {
+                        console.error('검색 실패');
+                    }
+                });
+            });
+        });
     </script>
+
 </head>
 <body>
 <div><h2 th:text>게시글</h2></div>
 <div>
-    <input type="text" ><button>찾기</button>
+    <form th:object="${postDto}" >
+    <input type="text" id="title" th:field="*{title}"><button id="searchButton" onclick="searchTitle(this)">찾기</button>
+    </form>
 </div>
 <div>
     <table border=1>
